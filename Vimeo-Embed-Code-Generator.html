@@ -1,0 +1,126 @@
+<!DOCTYPE html> 
+<html lang="en-gb"> 
+
+<head> 
+	<meta charset="UTF-8" /> 
+	<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" /> 
+	<title>Vimeo Video Embed Code Generator</title> 
+</head> 
+
+<!-- Custom CSS for Vimeo Video Embed Code Generator Tool -->
+<style> 
+	body { 
+		background-position: center; 
+		background-color: black; 
+		min-height: 100%;
+	} 
+
+	h1 { 
+		color: white; 
+		font-size: 20px; 
+		text-align: center; 
+		text-decoration: none; 
+		text-transform: uppercase; 
+		letter-spacing: 1.5px; 
+		text-shadow: 2px 2px 5px Blue; 
+		font-family: Arial, Helvetica, sans-serif; 
+	} 
+
+	button { 
+		background-color: #3B008D; 
+		color: white; 
+		padding: 10px 10px; 
+		margin: 5px 0 5px 0; 
+		border: none; 
+		cursor: pointer; 
+		width: 100%; 
+		opacity: 0.9; 
+		border-radius: 12px; 
+	} 
+
+	button:hover { 
+		background-color: indigo; 
+		border-radius: 4px; 
+		opacity: 40; 
+	} 
+
+	input[type=text] { 
+		width: 100%; 
+		padding: 10px 10px; 
+		margin: 5px 0 5px 0; 
+		border: 1px solid #ccc; 
+		border-radius: 4px; 
+		box-sizing: border-box; 
+		resize: vertical; 
+	} 
+
+	textarea { 
+		width: 100%; 
+		height: 220px; 
+		padding: 10px 10px; 
+		box-sizing: border-box; 
+		border: 4px solid #ccc; 
+		border-radius: 4px; 
+		background-color: #f8f8f8; 
+		font-size: 16px; 
+		resize: none; 
+	} 
+
+	.center { 
+		margin-left: auto; 
+		margin-right: auto; 
+		width: 75%; 
+		padding: 10px; 
+	} 
+</style> 
+
+<!-- HTML Body Code for Vimeo Video Embed Code Generator -->
+<body> 
+	<div class="center"> 
+		<h1><b>Vimeo VIDEO EMBED CODE GENERATOR</b></h1><br> 
+		<input type="text" placeholder="paste the youtube video url here" name="url" id="url"> 
+		<button onclick= "generateVimeoEmbedCode(document.getElementById('url').value)">Generate Embed Code</button> 
+		<p id="Video-Preview" style="text-align:left; color: white;"></p>
+        <p id="Video-Output"></p> 
+		<p id="Code-Preview" style="text-align:left; color: white;"></p> 
+        <form><textarea id="Embed-Code"></textarea></form>
+        <button onclick="copyEmbedCode()">Copy Embed Code</button>
+	</div>
+</body>
+
+<!-- JavaScript Function to Generate Vimeo Video Embed Code -->
+<script>
+    function generateVimeoEmbedCode(url) 
+    {  
+        let value;
+        if (url.slice(0,17) == "http://vimeo.com/"){
+                value = url.slice(17,25);
+        }
+        else if (url.slice(0,18) == "https://vimeo.com/"){
+                value = url.slice(18,26);
+        }
+        else {
+            alert("Invalid Input - Kindly Check the URL and Paste the Valid URL");
+        } 
+            
+        if(value != null){
+    
+        document.getElementById("Video-Output").innerHTML = "<style>.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }</style><div class='embed-container'><iframe src='https://player.vimeo.com/video/" + value + "' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>"; 
+        
+        document.getElementById("Embed-Code").innerHTML = "&lt;style&gt;.embed-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; } .embed-container iframe, .embed-container object, .embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }&lt;/style&gt;&lt;div class='embed-container'&gt;&lt;iframe src='https://player.vimeo.com/video/" + value + "' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowfullscreen>&lt;/iframe&gt;&lt;/div&gt;";
+        
+        }
+    }
+</script>
+
+<!-- JavaScript Function to Copy Vimeo Video Embed Code -->    
+<script>
+    function copyEmbedCode() {
+        var copyText = document.getElementById("Embed-Code");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); 
+        document.execCommand("copy");
+        alert("Copied the text: " + copyText.value);
+    }
+</script>
+</html>
